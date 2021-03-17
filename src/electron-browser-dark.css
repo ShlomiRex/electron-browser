@@ -4,9 +4,9 @@
 
 	--tab-title-color: white;
 
-	--tab-selected-background: rgb(70, 70, 70);
+	--tab-selected-background: rgb(45, 45, 45);
 
-	--tab-hover-background: rgb(50, 50, 50);
+	--tab-hover-background: rgb(19, 19, 19);
 
 	--tab-not-selected-color: white;
 	--tab-not-selected-background: rgb(30, 30, 30);
@@ -14,7 +14,7 @@
 
 	--tabs-diviers-color: gray;
 	
-	--tab-close-button-hover-color: #bec0c2;
+	--tab-close-button-hover-color: rgb(78, 78, 78);
 	--tab-close-button-hover-active-color: #e9ecf3;
 }
 
@@ -218,10 +218,11 @@
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background-image: url("x.svg");
+	background-image: url("x-white.svg");
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: 8px 8px;
+	background-size: 14px 14px;
+
 }
 .tab-close:hover {
 	background-color: var(--tab-close-button-hover-color);
