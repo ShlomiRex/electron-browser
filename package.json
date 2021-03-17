@@ -2,9 +2,9 @@
 	"name": "electron-browser",
 	"version": "1.0.0",
 	"description": "",
-	"main": "src/index.js",
+	"main": "index.js",
 	"scripts": {
-		"start": "electron .",
+		"start": "cd src/example/ && electron .",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {

@@ -6,21 +6,22 @@
 	<title>Hello World!</title>
 	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
-	<link rel="stylesheet" href="electron-browser.css">
-	<link rel="stylesheet" href="index.css">
+	<!-- The library css -->
+	<link rel="stylesheet" href="../electron-browser.css">
 
-	<!-- <link rel="stylesheet" href="index2.css"> -->
+	<!-- Out own css -->
+	<link rel="stylesheet" href="index.css">
 </head>
 
-<body >
-	<!-- We don't actually need a container, it's for demonstration only -->
+<body>
 	<div class="browser">
 		<div class="tabs">
 			<div class="tabs-content"></div>
 			<div class="tab-add"></div>
 		</div>
-		<div class="tabs-bar">
-			<button style="margin-left: 20px;" class="btn-toggle">Toggle Dark Mode</button>
+		<div style="padding: 5px;" class="tabs-bar">
+			<button style="margin-left: 20px; font-family: sans-serif; border: 2px red solid;"
+				class="btn-toggle">TOGGLE DARK MODE</button>
 
 			<label style="margin-left: 20px;">URL: </label>
 			<input id="url" type="url">
@@ -29,4 +30,5 @@
 	</div>
 	<script src="renderer.js"></script>
 </body>
+
 </html>

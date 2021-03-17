@@ -1,4 +1,4 @@
-const ElectronTabs = require("./electron-browser")
+const ElectronTabs = require("../electron-browser")
 const electronTabs = new ElectronTabs()
 
 electronTabs.addTab("Test", "test.html")
