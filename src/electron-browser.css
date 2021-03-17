@@ -1,21 +1,62 @@
-:root {
+body {
+	--tabs-container-background: rgb(222, 225, 230);
+	--tab-title-color: black;
+	--tab-selected-background: white;
+	--tab-hover-background: rgb(238, 240, 242);
+	--tab-not-selected-color: black;
+	--tab-not-selected-hover-color: black;
+	--tab-close-button-hover-color: rgb(220, 220, 221);
+	color: black;
+	background: white;
+}
 
+body.dark-theme {
+	color: white;
+	background: black;
 	--tabs-container-background: black;
-
 	--tab-title-color: white;
-
 	--tab-selected-background: rgb(45, 45, 45);
-
 	--tab-hover-background: rgb(19, 19, 19);
-
 	--tab-not-selected-color: white;
-	--tab-not-selected-background: rgb(30, 30, 30);
 	--tab-not-selected-hover-color: white;
-
-	--tabs-diviers-color: gray;
-	
 	--tab-close-button-hover-color: rgb(78, 78, 78);
+}
+
+:root {
+	--tab-not-selected-background: rgb(30, 30, 30);
+	--tab-not-selected-background: rgb(30, 30, 30);
+	--tabs-diviers-color: gray;
 	--tab-close-button-hover-active-color: #e9ecf3;
+}
+
+* {
+	--tab-add-hover-color: var(--tab-hover-background);
+}
+
+body.dark-theme webview {
+	background: white;
+}
+
+.tab-add {
+	flex-grow: 0;
+	flex-shrink: 0;
+	position: relative;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background-image: url("plus.svg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 12px 12px;
+	align-self: center;
+}
+
+body.dark-theme .tab-add {
+	background-image: url("plus-white.svg");
+}
+
+.tab-add:hover {
+	background-color: var(--tab-add-hover-color)
 }
 
 .tabs {
@@ -27,6 +68,8 @@
 	padding: 8px 3px 0px 3px;
 	background: var(--tabs-container-background);
 	overflow: hidden;
+	display: flex;
+	flex-flow: row;
 }
 
 .tab {
@@ -40,51 +83,56 @@
 	pointer-events: none;
 }
 
-/* Remove tab divider at the end and start of tabs */
+.tabs-bar {}
 
+/* Remove tab divider at the end and start of tabs */
 
 .tab-dividers::before {
 	left: 0;
 }
+
 .tab-dividers::after {
 	right: 0;
 }
-.tabs .tab:first-child .tab-dividers::before, 
-.tabs .tab:last-child .tab-dividers::after {
+
+.tabs .tab:first-child .tab-dividers::before, .tabs .tab:last-child .tab-dividers::after {
 	opacity: 0;
 }
 
-
 /* Remove tab divider at the end and start of tabs - end*/
-
 
 .tab:not(.selected) .tab-content .tab-title {
 	color: var(--tab-not-selected-color)
 }
+
 .tab:not(.selected) .tab-content:hover {
 	background: var(--tab-hover-background)
 }
-.tab:not(.selected) .tab-content:hover .tab-title  {
+
+.tab:not(.selected) .tab-content:hover .tab-title {
 	color: var(--tab-not-selected-hover-color);
 }
+
 .tab.selected .tab-content {
 	background: var(--tab-selected-background);
 }
+
 .tab.selected .tab-content .tab-title {
 	color: var(--tab-title-color)
 }
+
 .tabs-content {
 	position: relative;
 	width: 100%;
 	height: 100%;
 }
+
 .tabs .tab, .tabs .tab * {
 	user-select: none;
 	cursor: default;
 }
 
 /* Tab diviers */
-
 
 .tab-dividers {
 	position: absolute;
@@ -93,9 +141,11 @@
 	left: var(--tab-content-margin);
 	right: var(--tab-content-margin);
 }
+
 .tab-dividers, .tab-dividers::before, .tab-dividers::after {
 	pointer-events: none;
 }
+
 .tab-dividers::before, .tab-dividers::after {
 	content: "";
 	display: block;
@@ -108,7 +158,6 @@
 	transition: opacity 0.2s ease;
 }
 
-
 /* Tab diviers - end*/
 
 .tab-background {
@@ -119,26 +168,31 @@
 	height: 100%;
 	overflow: hidden;
 	pointer-events: none;
-
 	filter: brightness(0.28);
 }
+
 .tab[active] {
 	z-index: 5;
 }
+
 .tab:not([active]) .tab-background {
 	transition: opacity 0.2s ease;
 	opacity: 0;
 }
+
 .tab:not([active]):hover {
 	z-index: 2;
 }
+
 .tab:not([active]):hover .tab-background {
 	opacity: 1;
 }
+
 .tab.tab-was-just-added {
 	top: 10px;
 	animation: tab-was-just-added 120ms forwards ease-in-out;
 }
+
 .tab-content {
 	position: absolute;
 	display: flex;
@@ -152,13 +206,13 @@
 	overflow: hidden;
 	pointer-events: all;
 }
+
 .tab[is-mini] .tab-content {
 	padding-left: 2px;
 	padding-right: 2px;
 }
 
 /* tab favicon */
-
 
 .tab-favicon {
 	position: relative;
@@ -169,22 +223,23 @@
 	background-size: 16px;
 	margin-left: 4px;
 }
+
 .tab[is-small] .tab-favicon {
 	margin-left: 0;
 }
+
 .tab[is-mini]:not([active]) .tab-favicon {
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .tab[is-mini][active] .tab-favicon {
 	display: none;
 }
 
-
 /* tab favicon - end */
 
 /* tab title */
-
 
 .tab-title {
 	flex: 1;
@@ -195,21 +250,22 @@
 	-webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
 	mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
 }
+
 .tab[is-small] .tab-title {
 	margin-left: 0;
 }
+
 .tab-favicon+.tab-title, .tab[is-small] .tab-favicon+.tab-title {
 	margin-left: 8px;
 }
+
 .tab[is-smaller] .tab-favicon+.tab-title, .tab[is-mini] .tab-title {
 	display: none;
 }
 
-
 /* tab title - end */
 
 /* Tab close button */
-
 
 .tab-close {
 	flex-grow: 0;
@@ -222,33 +278,34 @@
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: 14px 14px;
-
 }
+
+body:not(.dark-theme) .tab-close {
+	background-image: url("x-black.svg");
+}
+
 .tab-close:hover {
 	background-color: var(--tab-close-button-hover-color);
 }
+
 .tab-close:hover:active {
 	background-color: var(--tab-close-button-hover-active-color);
 }
 
-
 /* Tab close button - end */
-
 
 .tabs .tab[is-smaller] .tab-close {
 	margin-left: auto;
 }
+
 .tabs .tab[is-mini]:not([active]) .tab-close {
 	display: none;
 }
+
 .tabs .tab[is-mini][active] .tab-close {
 	margin-left: auto;
 	margin-right: auto;
 }
-
-
-
-
 
 /* idk what this is */
 
@@ -257,16 +314,19 @@
 		top: 0;
 	}
 }
+
 @-webkit-keyframes tab-was-just-added {
 	to {
 		top: 0;
 	}
 }
+
 @-o-keyframes tab-was-just-added {
 	to {
 		top: 0;
 	}
 }
+
 @keyframes tab-was-just-added {
 	to {
 		top: 0;
@@ -285,38 +345,36 @@
 	border-top-right-radius: 8px;
 }
 
-
 /* when you drag it returns to original position, the less delay = faster */
+
 .tabs.tabs-is-sorting .tab:not(.tab-is-dragging), .tabs:not(.tabs-is-sorting) .tab.tab-was-just-dragged {
 	transition: transform 120ms ease-in-out;
 }
 
-
-
-
-
-
-
+/* ###################################################################### */
 
 /* ###################################################################### */
+
 /* ###################################################################### */
-/* ###################################################################### */
+
 /* Webview related CSSs */
 
 /* Parent of all webviews */
+
 .browser-views {
 	height: 100%;
 	display: flex;
 }
 
 /* At the beginning every webview is hidden */
+
 .browser-views>webview {
 	display: none;
 	flex: 1;
 }
 
 /* Only webview with 'selected' class is shown */
+
 .browser-views>webview.selected {
 	display: flex;
 }
-
