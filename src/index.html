@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Hello World!</title>
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+	<link rel="stylesheet" href="electron-browser-dark.css">
+	<link rel="stylesheet" href="index.css">
+
+	<!-- <link rel="stylesheet" href="index2.css"> -->
+</head>
+
+<body>
+	<!-- We don't actually need a container, it's for demonstration only -->
+	<div class="browser">
+		<div class="tabs">
+			<div class="tabs-content"></div>
+		</div>
+		<div class="browser-views"></div>
+	</div>
+
+	<script src="renderer.js"></script>
+</body>
+</html>

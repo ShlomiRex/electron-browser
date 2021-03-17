@@ -1,0 +1,321 @@
+:root {
+
+	--tabs-container-background: black;
+
+	--tab-title-color: white;
+
+	--tab-selected-background: rgb(70, 70, 70);
+
+	--tab-hover-background: rgb(50, 50, 50);
+
+	--tab-not-selected-color: white;
+	--tab-not-selected-background: rgb(30, 30, 30);
+	--tab-not-selected-hover-color: white;
+
+	--tabs-diviers-color: gray;
+	
+	--tab-close-button-hover-color: #bec0c2;
+	--tab-close-button-hover-active-color: #e9ecf3;
+}
+
+.tabs {
+	box-sizing: border-box;
+	position: relative;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	font-size: 12px;
+	height: 46px;
+	padding: 8px 3px 0px 3px;
+	background: var(--tabs-container-background);
+	overflow: hidden;
+}
+
+.tab {
+	position: absolute;
+	left: 0;
+	height: 100%;
+	width: 240px;
+	border: 0;
+	margin: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+
+/* Remove tab divider at the end and start of tabs */
+
+
+.tab-dividers::before {
+	left: 0;
+}
+.tab-dividers::after {
+	right: 0;
+}
+.tabs .tab:first-child .tab-dividers::before, 
+.tabs .tab:last-child .tab-dividers::after {
+	opacity: 0;
+}
+
+
+/* Remove tab divider at the end and start of tabs - end*/
+
+
+.tab:not(.selected) .tab-content .tab-title {
+	color: var(--tab-not-selected-color)
+}
+.tab:not(.selected) .tab-content:hover {
+	background: var(--tab-hover-background)
+}
+.tab:not(.selected) .tab-content:hover .tab-title  {
+	color: var(--tab-not-selected-hover-color);
+}
+.tab.selected .tab-content {
+	background: var(--tab-selected-background);
+}
+.tab.selected .tab-content .tab-title {
+	color: var(--tab-title-color)
+}
+.tabs-content {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.tabs .tab, .tabs .tab * {
+	user-select: none;
+	cursor: default;
+}
+
+/* Tab diviers */
+
+
+.tab-dividers {
+	position: absolute;
+	top: 7px;
+	bottom: 7px;
+	left: var(--tab-content-margin);
+	right: var(--tab-content-margin);
+}
+.tab-dividers, .tab-dividers::before, .tab-dividers::after {
+	pointer-events: none;
+}
+.tab-dividers::before, .tab-dividers::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 1px;
+	background: var(--tabs-diviers-color);
+	opacity: 1;
+	transition: opacity 0.2s ease;
+}
+
+
+/* Tab diviers - end*/
+
+.tab-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	pointer-events: none;
+
+	filter: brightness(0.28);
+}
+.tab[active] {
+	z-index: 5;
+}
+.tab:not([active]) .tab-background {
+	transition: opacity 0.2s ease;
+	opacity: 0;
+}
+.tab:not([active]):hover {
+	z-index: 2;
+}
+.tab:not([active]):hover .tab-background {
+	opacity: 1;
+}
+.tab.tab-was-just-added {
+	top: 10px;
+	animation: tab-was-just-added 120ms forwards ease-in-out;
+}
+.tab-content {
+	position: absolute;
+	display: flex;
+	top: 0;
+	bottom: 0;
+	left: var(--tab-content-margin);
+	right: var(--tab-content-margin);
+	padding: 9px 8px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	overflow: hidden;
+	pointer-events: all;
+}
+.tab[is-mini] .tab-content {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+/* tab favicon */
+
+
+.tab-favicon {
+	position: relative;
+	flex-shrink: 0;
+	flex-grow: 0;
+	height: 16px;
+	width: 16px;
+	background-size: 16px;
+	margin-left: 4px;
+}
+.tab[is-small] .tab-favicon {
+	margin-left: 0;
+}
+.tab[is-mini]:not([active]) .tab-favicon {
+	margin-left: auto;
+	margin-right: auto;
+}
+.tab[is-mini][active] .tab-favicon {
+	display: none;
+}
+
+
+/* tab favicon - end */
+
+/* tab title */
+
+
+.tab-title {
+	flex: 1;
+	vertical-align: top;
+	overflow: hidden;
+	white-space: nowrap;
+	margin-left: 4px;
+	-webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
+	mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
+}
+.tab[is-small] .tab-title {
+	margin-left: 0;
+}
+.tab-favicon+.tab-title, .tab[is-small] .tab-favicon+.tab-title {
+	margin-left: 8px;
+}
+.tab[is-smaller] .tab-favicon+.tab-title, .tab[is-mini] .tab-title {
+	display: none;
+}
+
+
+/* tab title - end */
+
+/* Tab close button */
+
+
+.tab-close {
+	flex-grow: 0;
+	flex-shrink: 0;
+	position: relative;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background-image: url("x.svg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 8px 8px;
+}
+.tab-close:hover {
+	background-color: var(--tab-close-button-hover-color);
+}
+.tab-close:hover:active {
+	background-color: var(--tab-close-button-hover-active-color);
+}
+
+
+/* Tab close button - end */
+
+
+.tabs .tab[is-smaller] .tab-close {
+	margin-left: auto;
+}
+.tabs .tab[is-mini]:not([active]) .tab-close {
+	display: none;
+}
+.tabs .tab[is-mini][active] .tab-close {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+
+
+/* idk what this is */
+
+@-moz-keyframes tab-was-just-added {
+	to {
+		top: 0;
+	}
+}
+@-webkit-keyframes tab-was-just-added {
+	to {
+		top: 0;
+	}
+}
+@-o-keyframes tab-was-just-added {
+	to {
+		top: 0;
+	}
+}
+@keyframes tab-was-just-added {
+	to {
+		top: 0;
+	}
+}
+
+/* idk what this is - end */
+
+.tab-drag-handle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+
+/* when you drag it returns to original position, the less delay = faster */
+.tabs.tabs-is-sorting .tab:not(.tab-is-dragging), .tabs:not(.tabs-is-sorting) .tab.tab-was-just-dragged {
+	transition: transform 120ms ease-in-out;
+}
+
+
+
+
+
+
+
+
+/* ###################################################################### */
+/* ###################################################################### */
+/* ###################################################################### */
+/* Webview related CSSs */
+
+/* Parent of all webviews */
+.browser-views {
+	height: 100%;
+	display: flex;
+}
+
+/* At the beginning every webview is hidden */
+.browser-views>webview {
+	display: none;
+	flex: 1;
+}
+
+/* Only webview with 'selected' class is shown */
+.browser-views>webview.selected {
+	display: flex;
+}
+

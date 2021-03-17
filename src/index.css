@@ -1,0 +1,33 @@
+.browser {
+	margin-top: 100px;
+	margin-left: 100px;
+	width: 800px;
+	height: 600px;
+	display: flex;
+	flex-direction: column;
+	border: 5px solid red;
+
+	resize: both;
+	overflow: auto;
+}
+
+.browser-views {
+	border: 5px solid greenyellow;
+}
+
+.browser-views>webview {
+	border: 5px solid blue;
+}
+
+.browser-views>webview.selected {
+	border: 5px solid blue;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: inherit;
+}
