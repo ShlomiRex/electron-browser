@@ -359,93 +359,113 @@ const defaultTapProperties = {
 var chromeTabs = new ChromeTabs()
 
 class ElectronChromeTabs {
-	DOM_chrome_tabs;
-	accTabId = 0;
+	DOM_tabs;
+	DOM_browser_views;
+
+	accTabId = 0; //Tab id accumulator
 
 	tabs = []
-	webviews = [] // Holes in array are allowed, access tabId fast (index = tabId)
-	webviewtoPush = undefined; //Set this 
+	views = [] 
+
+	viewToPush = undefined;
 
 	activeTab = undefined;
-	activeWebview = undefined;
+	activeView = undefined;
 
 	constructor() {
-		this.DOM_chrome_tabs = document.querySelector('.tabs')
-		chromeTabs.init(this.DOM_chrome_tabs)
+		this.DOM_tabs = document.querySelector('.tabs')
+		chromeTabs.init(this.DOM_tabs)
 
-		this.DOM_chrome_tabs.addEventListener("activeTabChange", (event) => {
+		this.DOM_browser_views = document.querySelector(".browser-views");
+
+		this.DOM_tabs.addEventListener("activeTabChange", (event) => {
 			let tab = event.detail.tabEl
 			let id = tab["data-ectTabId"]
-			console.debug("Active tab changed to: ", tab)
+			console.debug("Active tab changed to: ", tab, id)
 
-			function set_active_webview_and_deselect_others(webview, i) {
+			function set_active_webview_and_deselect_others(view, i) {
 				if (i == id) {
-					webview.classList.add("selected");
-					this.activeWebview = webview
+					view.classList.add("selected");
+					this.activeView = view
 				} else {
-					webview.classList.remove("selected");
+					view.classList.remove("selected");
 				}
 			}
 			var boundFunction = set_active_webview_and_deselect_others.bind(this)
 
-			this.webviews.forEach(boundFunction)
+			this.views.forEach(boundFunction)
 
 			this.activeTab = this.tabs[id]
 
 			this.getCurrent()
 		});
 
-		this.DOM_chrome_tabs.addEventListener('tabAdd', (event) => {
+		this.DOM_tabs.addEventListener('tabAdd', (event) => {
 			let tab = event.detail.tabEl
 			let id = this.accTabId++
 			tab["data-ectTabId"] = id
 			this.tabs.push(tab)
 			//console.debug("Tab added:", id, event.detail)
 
-			this.webviews.push(this.webviewtoPush)
+			if(this.viewToPush)
+				this.views.push(this.viewToPush)
+			else {
+				throw "View to push is undefined"
+			}
 		});
 
-		this.DOM_chrome_tabs.addEventListener("tabRemove", (event) => {
+		this.DOM_tabs.addEventListener("tabRemove", (event) => {
 			let tab = event.detail.tabEl
 			let id = tab["data-ectTabId"]
 			console.debug("Tab remove: ", id)
 
-			console.debug("Tab array: ", this.webviews)
+			console.debug("Tab array: ", this.views)
 
-			this.webviews[id].remove() //Delete from document
-			delete this.webviews[id] //Delete from array
+			this.views[id].remove() //Delete from document
+			delete this.views[id] //Delete from array
 
-			console.debug("Tab array after delete: ", this.webviews)
+			console.debug("Tab array after delete: ", this.views)
 		});
 	}
 
-	addTab(title, src, favicon = "") {
-		const webview = document.createElement("webview")
-		webview.setAttribute("src", src)
+	addTab(title, favicon="", src=undefined) {
+		let child = undefined
+		if(src) {
+			console.log("Adding webview view")
+			child = document.createElement("webview")
+			child.setAttribute("src", src);
+		} else {
+			console.log("Adding div view")
+			child = document.createElement("div");
 
-		const parent = document.querySelector(".browser-views")
-		parent.appendChild(webview)
+			//child.innerHTML = "<html><body>Test Body</body></html>"
+		}
+		child.classList.add("eb-view");
+		child.dataset.eb_view_id = this.accTabId;
 
-		this.webviewtoPush = webview
+		this.viewToPush = child;
+
+		
+		this.DOM_browser_views.appendChild(child);
 
 		let tabEl = chromeTabs.addTab({
 			title: title,
 			favicon: favicon
-		})
+		});
 
 		this.activeTab = tabEl;
-		this.activeWebview = webview;
+		this.activeView = child;
 
 		return {
 			"tab": tabEl,
-			"webview": webview
+			"view": child
 		}
 	}
 
 	getCurrent() {
 		return {
 			"activeTab": this.activeTab,
-			"activeWebview": this.activeWebview
+			"activeWebview": this.activeView
 		}
 	}
 }

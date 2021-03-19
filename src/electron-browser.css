@@ -33,10 +33,6 @@ body.dark-theme {
 	--tab-add-hover-color: var(--tab-hover-background);
 }
 
-body.dark-theme webview {
-	background: white;
-}
-
 .tab-add {
 	flex-grow: 0;
 	flex-shrink: 0;
@@ -375,15 +371,15 @@ body:not(.dark-theme) .tab-close {
 	display: flex;
 }
 
-/* At the beginning every webview is hidden */
+/* At the beginning every view/webview is hidden */
 
-.browser-views>webview {
+.browser-views .eb-view {
 	display: none;
 	flex: 1;
 }
 
 /* Only webview with 'selected' class is shown */
 
-.browser-views>webview.selected {
+.browser-views .eb-view.selected {
 	display: flex;
 }
