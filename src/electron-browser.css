@@ -83,8 +83,6 @@ body.dark-theme .tab-add {
 	pointer-events: none;
 }
 
-.tabs-bar {}
-
 /* Remove tab divider at the end and start of tabs */
 
 .tab-dividers::before {
@@ -350,6 +348,17 @@ body:not(.dark-theme) .tab-close {
 .tabs.tabs-is-sorting .tab:not(.tab-is-dragging), .tabs:not(.tabs-is-sorting) .tab.tab-was-just-dragged {
 	transition: transform 120ms ease-in-out;
 }
+
+
+.browser {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	resize: both;
+	overflow: auto;
+}
+
 
 /* ###################################################################### */
 

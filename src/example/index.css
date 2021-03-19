@@ -2,14 +2,7 @@ body {
 	height: 100vh;
 }
 
-.browser {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	resize: both;
-	overflow: auto;
-}
+
 
 *,
 *::before,
