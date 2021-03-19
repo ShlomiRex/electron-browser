@@ -1,26 +1,14 @@
+body {
+	height: 100vh;
+}
+
 .browser {
-	margin-top: 100px;
-	margin-left: 100px;
-	width: 800px;
-	height: 600px;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	border: 5px solid red;
-
 	resize: both;
 	overflow: auto;
-}
-
-.browser-views {
-	border: 5px solid greenyellow;
-}
-
-.browser-views>webview {
-	border: 5px solid blue;
-}
-
-.browser-views>webview.selected {
-	border: 5px solid blue;
 }
 
 *,
