@@ -63,7 +63,6 @@ body.dark-theme .tab-add {
 	height: 46px;
 	padding: 8px 3px 0px 3px;
 	background: var(--tabs-container-background);
-	overflow: hidden;
 	display: flex;
 	flex-flow: row;
 }

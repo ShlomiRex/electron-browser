@@ -462,6 +462,11 @@ class ElectronChromeTabs {
 		}
 	}
 
+	removeCurrentTab() {
+		this.activeView.remove()
+		chromeTabs.removeTab(this.activeTab)
+	}
+
 	getCurrent() {
 		return {
 			"activeTab": this.activeTab,
