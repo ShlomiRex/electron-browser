@@ -473,6 +473,14 @@ class ElectronChromeTabs {
 			"activeWebview": this.activeView
 		}
 	}
+
+	hideTabsBar() {
+		document.getElementById("eb-tabs-bar").style.display = "none";
+	}
+
+	showTabsBar() {
+		document.getElementById("eb-tabs-bar").style.display = "block";
+	}
 }
 
 module.exports = ElectronChromeTabs

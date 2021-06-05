@@ -2,6 +2,7 @@ const ElectronTabs = require("../electron-browser")
 const electronTabs = new ElectronTabs()
 
 
+electronTabs.hideTabsBar();
 electronTabs.addTab("Test div view", "")
 electronTabs.addTab("Test webview view", "", "test.html")
 electronTabs.addTab("Google", "favicons/google-favicon.ico", "https://google.com")
